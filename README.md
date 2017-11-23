@@ -12,7 +12,7 @@ Test Watson:
 Run `node src/testEmotion.js` to test the watson service on the given data.
 
 Todo:
-- Use server proxy to call Watson service.
+- Use server proxy to call Watson service or try and obtain a server token to access the API.
 https://developer.ibm.com/answers/questions/375745/401-error-in-watson-natural-language-understanding.html
 - Tests
 - Graph visualisation of data using visualisation library (d3.js)
