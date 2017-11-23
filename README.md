@@ -6,6 +6,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 To run:
 `yarn start`
 
+Add a .env file in the root folder and these environment variables `REACT_APP_WATSON_USERNAME` and `REACT_APP_WATSON_PASSWORD`.
+
 Test Watson:
 Run `node src/testEmotion.js` to test the watson service on the given data.
 
