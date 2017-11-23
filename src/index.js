@@ -6,7 +6,7 @@ import App from './components/App';
 import playData from './henry_iv.json';
 import registerServiceWorker from './registerServiceWorker';
 
-const importData = () => {
+export const importData = () => {
   let data = {};
 
   let currentAct = "";

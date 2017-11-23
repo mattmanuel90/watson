@@ -39,16 +39,7 @@ export function fetchData(body) {
     let parameters = {
 	    'text': body,
 	    'features': {
-	      'entities': {
-	        'emotion': true,
-	        'sentiment': true,
-	        'limit': 2
-	      },
-	      'keywords': {
-	        'emotion': true,
-	        'sentiment': true,
-	        'limit': 2
-	      }
+	    	emotion: {}
 	    }
   	}
 
@@ -61,8 +52,8 @@ export function fetchData(body) {
 	      dispatch(fetchDataError(true));
 	    }
 	    else {
-	      console.log(response.entities);
-	      dispatch(fetchDataSuccess(response.entities));
+	      console.log(response.emotion);
+	      dispatch(fetchDataSuccess(response.emotion));
 	    }
   	});
 	};
