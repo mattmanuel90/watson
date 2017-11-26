@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import { fetchData, fetchDataIsLoading, fetchDataHasErrored } from './fetchData';
+import { fetchData, fetchDataIsLoading, fetchDataHasErrored, fetchDataHasAuthenticated } from './fetchData';
 export default combineReducers({
 	fetchData,
 	fetchDataIsLoading,
-	fetchDataHasErrored
+	fetchDataHasErrored,
+  fetchDataHasAuthenticated
 });

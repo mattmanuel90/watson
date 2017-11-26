@@ -3,17 +3,23 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from './store/configureStore.js';
 import App from './components/App';
-import playData from './henry_iv.json';
+import playData from './henry_iv_backup.json';
 import registerServiceWorker from './registerServiceWorker';
 
-export const importData = () => {
-  let data = {};
+export const initialiseData = () => {
 
+  let state = {
+    acts: [],
+    hasAuthenticated: false,
+    authenticationToken: null
+  }
+
+
+  let data = [];
   let currentAct = "";
   let currentScene = "";
 
   for(let {text_entry} of playData) {
-
     if(text_entry.includes('ACT')) {
       data[text_entry] = {};
       currentAct = text_entry;
@@ -25,12 +31,28 @@ export const importData = () => {
     }
   }
 
-  return data;
+  let acts = [];
+  for ( const actName of Object.keys(data) ) {
+    let act = {
+      act: actName,
+      scenes: []
+    }
+    for ( const sceneName of Object.keys(data[actName]) ) {
+      act.scenes.push({
+        scene: sceneName,
+        paragraph: data[actName][sceneName].join(' '),
+        score: null
+      });
+    }
+    acts.push(act);
+  }
+
+  state.acts = acts;
+  return state;
 }
 
-
 let defaultState = {
-  fetchData: importData()
+  fetchData: initialiseData()
 };
 
 const store = configureStore(defaultState);
