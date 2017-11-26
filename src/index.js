@@ -3,17 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from './store/configureStore.js';
 import App from './components/App';
-import playData from './henry_iv_backup.json';
+import playData from './henry_iv.json';
 import registerServiceWorker from './registerServiceWorker';
 
 export const initialiseData = () => {
 
   let state = {
     acts: [],
-    hasAuthenticated: false,
-    authenticationToken: null
   }
-
 
   let data = [];
   let currentAct = "";
@@ -41,7 +38,8 @@ export const initialiseData = () => {
       act.scenes.push({
         scene: sceneName,
         paragraph: data[actName][sceneName].join(' '),
-        score: null
+        score: null,
+        loading: 'queued'
       });
     }
     acts.push(act);
@@ -52,7 +50,8 @@ export const initialiseData = () => {
 }
 
 let defaultState = {
-  fetchData: initialiseData()
+  fetchData: initialiseData(),
+  authenticate: { hasAuthenticated: false, token: null }
 };
 
 const store = configureStore(defaultState);

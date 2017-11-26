@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../actions/fetchData';
+import { authenticate } from '../actions/authenticate';
+
 
 class DisplayData extends Component {
 
@@ -10,16 +12,17 @@ class DisplayData extends Component {
         this.props.fetchData({
           paragraph: scene.paragraph,
           act: act.act,
-          scene: scene.scene
-        })
-      })
-    })
+          scene: scene.scene,
+          token: this.props.auth.token
+        });
+      });
+    });
   }
   
   render() {
     const renderData = (data) => {
       return data.map(data => 
-        <div key={data.act}>
+        <div style={{margin: "10px"}} key={data.act}>
           { data.act }
           { displayScenes(data.scenes) }
         </div>
@@ -27,7 +30,7 @@ class DisplayData extends Component {
     }
 
     const renderScore = (score) =>
-    <div>
+    <div style={{fontSize: "x-small"}}>
       <div>Sadness: {score.sadness} </div>
       <div>Joy: {score.joy} </div>
       <div>Fear: {score.fear} </div>
@@ -37,9 +40,9 @@ class DisplayData extends Component {
 
     const displayScenes = (scenes) => {
       return scenes.map(scene => 
-        <div key={scene.scene}>
+        <div style={{fontSize: "small", margin: "20px"}} key={scene.scene}>
           {scene.scene}
-          {scene.score !== null && renderScore(scene.score)}
+          {scene.score !== null ? renderScore(scene.score) : <div>(loading score...)</div>}
         </div>
       );
     }
@@ -55,12 +58,12 @@ class DisplayData extends Component {
 const mapStateToProps = (state) => ({
   data: state.fetchData.acts,
   hasErrored: state.fetchDataHasErrored,
-  isLoading: state.fetchDataIsLoading,
-  hasAuthenticated: state.fetchDataHasAuthenticated
+  auth: state.authenticate
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchData: (body) => dispatch(fetchData(body))
+  fetchData: (body) => dispatch(fetchData(body)),
+  authenticate: (body) => dispatch(authenticate(body)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DisplayData);
