@@ -1,7 +1,7 @@
 import { WATSON_API_AUTHENTICATED } from '../actions/authenticate';
 
 const defaultState = {
-  authenticated: false,
+  hasAuthenticated: false,
   token: null
 };
 

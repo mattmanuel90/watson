@@ -12,7 +12,8 @@ export function fetchDataHasAuthenticated(bool, token = null) {
 export function authenticate() {
   return (dispatch) => {
     dispatch(fetchDataHasAuthenticated(false));
-    fetch('/api/token')
+
+   return fetch('/api/token')
     .then(res => res.text())
     .then(token => dispatch(fetchDataHasAuthenticated(true, token)));
   };
